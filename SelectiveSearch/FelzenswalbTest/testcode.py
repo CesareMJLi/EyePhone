@@ -55,9 +55,10 @@ def _generate_segments(im_orig, scale, sigma, min_size):
     im_orig[:, :, 3] = im_mask
     # print(im_orig[:,:,3])
     skimage.io.imsave('test_1.png', im_orig[:,:,3]/256)
+    # skimage.io.imsave('test_2.png', im_orig[:,:,3]/1000)
 
     return im_orig
 
 # filename = os.path.join(skimage.data_dir, 'test.jpeg')
-img = skimage.io.imread("/Users/cesare/python/selectivesearch/testcode/test.jpeg")
+img = skimage.io.imread("/Users/cesare/python/EyePhone/SelectiveSearch/FelzenswalbTest/test.jpeg")
 _generate_segments(img,scale = 1.0, sigma = 0.8, min_size = 50)
