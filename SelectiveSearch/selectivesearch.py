@@ -126,8 +126,10 @@ def _calc_texture_gradient(img):
         output will be [height(*)][width(*)]
     """
     ret = numpy.zeros((img.shape[0], img.shape[1], img.shape[2]))
+    # same size as the img: length*width*3-d vector
 
     for colour_channel in (0, 1, 2):
+        # for each channel
         ret[:, :, colour_channel] = skimage.feature.local_binary_pattern(
             img[:, :, colour_channel], 8, 1.0)
 
