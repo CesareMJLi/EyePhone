@@ -9,12 +9,14 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import selectivesearch
 
+path = "/Users/cesare/python/EyePhone/SelectiveSearch/"
+filenames = ["test1.JPG","test2.JPG","test3.JPG"]
 
-def main():
+def main(filename):
 
     # loading astronaut image
     # img = skimage.data.astronaut()
-    img  = skimage.io.imread("/Users/cesare/python/EyePhone/SelectiveSearch/test1.JPG")
+    img  = skimage.io.imread(path+filename)
 
     # perform selective search
     img_lbl, regions = selectivesearch.selective_search(
@@ -26,7 +28,8 @@ def main():
         if r['rect'] in candidates:
             continue
         # excluding regions smaller than 2000 pixels
-        if r['size'] < 2000:
+        # if r['size'] < 2000:
+        if r['size'] < 1000:
             continue
         # distorted rects
         x, y, w, h = r['rect']
@@ -46,4 +49,5 @@ def main():
     plt.show()
 
 if __name__ == "__main__":
-    main()
+    for n in filenames:
+        main(n)

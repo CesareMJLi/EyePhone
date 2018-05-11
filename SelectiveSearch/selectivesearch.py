@@ -72,8 +72,12 @@ def _sim_fill(r1, r2, imsize):
 
 
 def _calc_sim(r1, r2, imsize):
-    return (_sim_colour(r1, r2) + _sim_texture(r1, r2)
-            + _sim_size(r1, r2, imsize) + _sim_fill(r1, r2, imsize))
+    # return (_sim_colour(r1, r2) + _sim_texture(r1, r2)
+    #         + _sim_size(r1, r2, imsize) + _sim_fill(r1, r2, imsize))
+
+    # normalize the parameter of all the similarities
+    return (0.2*_sim_colour(r1, r2) + 0.6*_sim_texture(r1, r2)
+            + 0.1*_sim_size(r1, r2, imsize) + 0.1*_sim_fill(r1, r2, imsize))
 
 
 def _calc_colour_hist(img):
