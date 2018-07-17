@@ -24,14 +24,17 @@ def main(filename):
 
     candidates = set()
     for r in regions:
+        # in this part we deal with the rectangles set from SS, while we must select them, another idea is too add the parameter
+        # of [CANDIDATE SIZE/LENGTH-WIDTH RATIO] into the selective search program.
+
         # excluding same rectangle (with different segments)
         if r['rect'] in candidates:
             continue
-        # excluding regions smaller than 2000 pixels
+        # excluding regions smaller than 2000/1000 pixels
         # if r['size'] < 2000:
         if r['size'] < 1000:
             continue
-        # distorted rects
+        # distorted rects， we only want the 'squared' rectangles, nerther too long or too short
         x, y, w, h = r['rect']
         if w / h > 1.2 or h / w > 1.2:
             continue
