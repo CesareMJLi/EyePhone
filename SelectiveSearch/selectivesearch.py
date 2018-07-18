@@ -76,8 +76,9 @@ def _calc_sim(r1, r2, imsize):
     #         + _sim_size(r1, r2, imsize) + _sim_fill(r1, r2, imsize))
 
     # normalize the parameter of all the similarities
-    return (0.2*_sim_colour(r1, r2) + 0.6*_sim_texture(r1, r2)
+    return (0.3*_sim_colour(r1, r2) + 0.5*_sim_texture(r1, r2)
             + 0.1*_sim_size(r1, r2, imsize) + 0.1*_sim_fill(r1, r2, imsize))
+            # here the weights of each similarity is from the paper. While in fact they could be the number to be learned if this algorithm proved practical
 
 
 def _calc_colour_hist(img):
@@ -100,6 +101,9 @@ def _calc_colour_hist(img):
         number of bins is 25 as same as [uijlings_ijcv2013_draft.pdf]
 
         extract HSV
+
+        - while one problem is that if we keep each pixel the same, while we transform the shape, it may cause a problem that same color histogram sharing
+        very different features.
     """
 
     BINS = 25
@@ -108,14 +112,14 @@ def _calc_colour_hist(img):
     for colour_channel in (0, 1, 2):
 
         # extracting one colour channel
-        c = img[:, colour_channel]
+        c = img[:,:, colour_channel]
 
         # calculate histogram for each colour and join to the result
         hist = numpy.concatenate(
             [hist] + [numpy.histogram(c, BINS, (0.0, 255.0))[0]])
 
     # L1 normalize
-    hist = hist / len(img)
+    hist = hist / (len(img)*len(img[0]))
 
     return hist
 
