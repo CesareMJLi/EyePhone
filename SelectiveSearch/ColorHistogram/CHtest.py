@@ -24,6 +24,7 @@ def _calc_colour_hist(img):
     return hist
 
 
+# original color histograms
 # def _calc_colour_hist(img):
 
 #     BINS = 25
